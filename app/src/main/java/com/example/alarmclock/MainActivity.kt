@@ -16,14 +16,26 @@ import java.util.Calendar
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var alarmManager: AlarmManager
+
+    private var alarmManagers = arrayListOf<AlarmManager>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var reqCode = 0
+
+
         binding.btnSavetime.setOnClickListener {
+
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+            alarmManagers.add(alarmManager)
+
+
+
 
             val sec = binding.etSetTime
 
@@ -44,10 +56,10 @@ class MainActivity : AppCompatActivity() {
 
 
             val i = Intent(applicationContext, MyBroadcast::class.java)
-            var pi = PendingIntent.getBroadcast(applicationContext, 101, i, 0)
-            alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            var pi = PendingIntent.getBroadcast(applicationContext, reqCode++, i, 0)
+            alarmManagers[alarmManagers.size-1] = getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.set(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pi)
-            Toast.makeText(this, "Alarm Is set", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Alarm Is set at ${cal.time.hours} : ${cal.time.minutes}", Toast.LENGTH_SHORT).show()
 
 
         }
