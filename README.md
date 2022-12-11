@@ -1,11 +1,11 @@
 
-# Weather App
+# Alarm Clock App
 
 Simple Alarm Clock
 
 ## Description
 
-Simple Alarm clock by whick you set Multiple Alarms in a day
+Simple Alarm clock by which you set Multiple Alarms in a day
 
 # Setup
 
