@@ -1,5 +1,5 @@
 
-# Weather App
+# Alarm Clock App
 
 Simple Alarm Clock
 
